@@ -1,4 +1,4 @@
 # Mario-Style Game
-A Mario-style game for everyone who loves Mario.
+A Mario-style game for everyone who loves Mario. This game will have collisions, gravity, different animated characters, adventrue, and much much more!
 
 It was build by Python.
