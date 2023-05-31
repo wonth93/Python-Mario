@@ -17,7 +17,7 @@ FPS = 60 # frame per second
 PLAYER_VEL = 5 # player velocity moving around the screen
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# Player
+# Player info and movement
 class Player(pygame.sprite.Sprite):
   COLOR = (255, 0, 0)
 
@@ -64,13 +64,25 @@ def get_background(name):
   
   return tiles, image
 
-# Function to draw the background
+# Function to draw the background and player
 def draw(window, background, bg_image, player):
   for tile in background:
     window.blit(bg_image, tuple(tile))
 
   player.draw(window)
   pygame.display.update()
+
+# Function for player movement
+def handle_move(player):
+  # check the keys are being pressed on keyboard
+  keys = pygame.key.get_pressed()
+
+  # Move only when holding down the keys
+  player.x_vel = 0
+  if keys[pygame.K_LEFT]:
+    player.move_left(PLAYER_VEL)
+  if keys[pygame.K_RIGHT]:
+    player.move_right(PLAYER_VEL)
 
 # Main function - what we run to start the game
 def main(window):
@@ -89,7 +101,9 @@ def main(window):
       if event.type == pygame.QUIT:
         run = False
         break
-
+    
+    player.loop(FPS)
+    handle_move(player)
     draw(window, background, bg_image, player)
 
   pygame.quit()
