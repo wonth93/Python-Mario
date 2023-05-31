@@ -12,13 +12,12 @@ pygame.init()
 pygame.display.set_caption("MW Mario")
 
 # List of global variables
-BG_COLOR = (255, 255, 255)
 WIDTH, HEIGHT = 1000, 600
 FPS = 60 # frame per second
 PLAYER_VEL = 5 # player velocity moving around the screen
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-
+# Function to create the game background
 def get_background(name):
   image = pygame.image.load(join("assets", "Background", name))
   _, _, width, height = image.get_rect()
@@ -31,6 +30,7 @@ def get_background(name):
   
   return tiles, image
 
+# Function to draw the background
 def draw(window, background, bg_image):
   for tile in background:
     window.blit(bg_image, tuple(tile))
@@ -40,7 +40,7 @@ def draw(window, background, bg_image):
 # Main function - what we run to start the game
 def main(window):
   clock = pygame.time.Clock()
-  background, bg_image = get_background("Gray.png")
+  background, bg_image = get_background("Green.png")
 
   # regulate the frame rate across different devices
   run = True
@@ -52,6 +52,8 @@ def main(window):
       if event.type == pygame.QUIT:
         run = False
         break
+
+    draw(window, background, bg_image)
 
   pygame.quit()
   quit()
