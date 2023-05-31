@@ -4,19 +4,20 @@ import math
 import pygame
 from os import listdir
 from os.path import isfile, join
+
+# Initialize the pygame module
 pygame.init()
 
 # setting the caption at the top of the window
-pygame.display.set_caption("Martin Mario")
+pygame.display.set_caption("MW Mario")
 
+# List of global variables
 BG_COLOR = (255, 255, 255)
 WIDTH, HEIGHT = 1000, 600
-# frame per second
-FPS = 60
-# player velocity moving around the screen
-PLAYER_VEL = 5
-
+FPS = 60 # frame per second
+PLAYER_VEL = 5 # player velocity moving around the screen
 window = pygame.display.set_mode((WIDTH, HEIGHT))
+
 
 def get_background(name):
   image = pygame.image.load(join("assets", "Background", name))
@@ -36,6 +37,7 @@ def draw(window, background, bg_image):
 
   pygame.display.update()
 
+# Main function - what we run to start the game
 def main(window):
   clock = pygame.time.Clock()
   background, bg_image = get_background("Gray.png")
@@ -46,6 +48,7 @@ def main(window):
     clock.tick(FPS)
 
     for event in pygame.event.get():
+      # allow player to quit the game
       if event.type == pygame.QUIT:
         run = False
         break
