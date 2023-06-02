@@ -3,4 +3,4 @@ A Mario-style game for everyone who loves Mario. This game will have collisions,
 
 It was built by Python.
 
-Credit to [Python Platformer Game Tutorial for Beginners](https://www.youtube.com/watch?v=6gLeplbqtqg&t=1661s)
+Credit to [Python Platformer Game Tutorial for Beginners](https://www.youtube.com/watch?v=6gLeplbqtqg)
