@@ -130,7 +130,7 @@ class Player(pygame.sprite.Sprite):
     self.update()
 
   def update(self):
-    # self.rect = self.sprite.get_rect(topLeft=(self.rect.x, self.rect.y))
+    self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
     self.mask = pygame.mask.from_surface(self.sprite)
 
   def draw(self, win, offset_x):
@@ -184,7 +184,7 @@ def handle_vertical_collision(player, objects, dy):
   for obj in objects:
     if pygame.sprite.collide_mask(player, obj):
       if dy > 0:
-        player.rect.bottom = obj.rect.top - 10
+        player.rect.bottom = obj.rect.top
         player.landed()
       elif dy < 0:
         player.rect.top = obj.rect.bottom
