@@ -275,11 +275,13 @@ def main(window):
   background, bg_image = get_background("Green.png")
   block_size = 96
   player = Player(100, 100, 50, 50)
-  fire = Fire(100, HEIGHT - block_size - 64, 16, 32)
+  fire = Fire(block_size * 3, HEIGHT - block_size - 64, 16, 32)
   fire.on()
   # blocks = [Block(0, HEIGHT - block_size, block_size)]
-  floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-WIDTH // block_size, WIDTH * 2 // block_size)]
-  objects =[*floor, Block(0, HEIGHT - block_size * 2, block_size), Block(block_size * 3, HEIGHT - block_size * 4, block_size), fire]
+  floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 999)]
+  wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
+  floating = [Block(block_size * i, HEIGHT - block_size * 4, block_size) for i in range(3, 5)]
+  objects =[*floor, *wall, fire, *floating]
   offset_x = 0
   scroll_area_width = 200
 
