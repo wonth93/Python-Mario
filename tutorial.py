@@ -279,7 +279,7 @@ def main(window):
   fire.on()
   floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 999)]
   wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 6)]
-  wall_2 = [Block(block_size, HEIGHT - block_size * i, block_size) for i in range(2, 5)]
+  wall_2 = [Block(block_size, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
   wall_3 = [Block(block_size * 2, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
   wall_4 = Block(block_size * 3, HEIGHT - block_size * 2, block_size)
   obs = [Block(block_size * i, HEIGHT - block_size * 2, block_size) for i in range (7, 10)]
@@ -309,6 +309,7 @@ def main(window):
     
     player.loop(FPS)
     fire.loop()
+    fire_2.loop()
     # handle_move(player, floor)
     handle_move(player, objects)
     # draw(window, background, bg_image, player, floor, offset_x)
