@@ -9,7 +9,7 @@ from os.path import isfile, join
 pygame.init()
 
 # setting the caption at the top of the window
-pygame.display.set_caption("MW Mario")
+pygame.display.set_caption("MW Ninja Frog")
 
 # List of global variables
 WIDTH, HEIGHT = 1000, 600
@@ -275,13 +275,21 @@ def main(window):
   background, bg_image = get_background("Green.png")
   block_size = 96
   player = Player(100, 100, 50, 50)
-  fire = Fire(block_size * 3, HEIGHT - block_size - 64, 16, 32)
+  fire = Fire(block_size / 3, HEIGHT - block_size * 5 - 64, 16, 32)
   fire.on()
-  # blocks = [Block(0, HEIGHT - block_size, block_size)]
   floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 999)]
-  wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
-  floating = [Block(block_size * i, HEIGHT - block_size * 4, block_size) for i in range(3, 5)]
-  objects =[*floor, *wall, fire, *floating]
+  wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 6)]
+  wall_2 = [Block(block_size, HEIGHT - block_size * i, block_size) for i in range(2, 5)]
+  wall_3 = [Block(block_size * 2, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
+  wall_4 = Block(block_size * 3, HEIGHT - block_size * 2, block_size)
+  obs = [Block(block_size * i, HEIGHT - block_size * 2, block_size) for i in range (7, 10)]
+  obs_2 = [Block(block_size * i + block_size / 2, HEIGHT - block_size * 3, block_size) for i in range (7, 9)]
+  obs_3 = Block(block_size * 8, HEIGHT - block_size * 4, block_size)
+  fire_2 = Fire(block_size * 8 + block_size / 3, HEIGHT - block_size * 4 - 64, 16, 32)
+  fire_2.on()
+  # stair = [Block(block_size * i, HEIGHT - block_size * (i - 1) , block_size) for i in range(3, 6)]
+  # platform = [Block(block_size * i, HEIGHT - block_size * 4 , block_size) for i in range(6, 8)]
+  objects =[*floor, fire, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, fire_2]
   offset_x = 0
   scroll_area_width = 200
 
