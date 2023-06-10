@@ -294,7 +294,8 @@ def main(window):
   fire.on()
   fire_2 = Fire(block_size * 8 + block_size / 3, HEIGHT - block_size * 4 - 64, 16, 32)
   fire_2.on()
-  floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 999)]
+  floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 13)]
+  floor_2 = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(20, 30)]
   wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 6)]
   wall_2 = [Block(block_size, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
   wall_3 = [Block(block_size * 2, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
@@ -303,9 +304,10 @@ def main(window):
   obs_2 = [Block(block_size * i + block_size / 2, HEIGHT - block_size * 3, block_size) for i in range (7, 9)]
   obs_3 = Block(block_size * 8, HEIGHT - block_size * 4, block_size)
   float = [OrangeBlock(block_size * i,  HEIGHT - block_size * 4, block_size) for i in range (4, 6)]
-  # stair = [Block(block_size * i, HEIGHT - block_size * (i - 1) , block_size) for i in range(3, 6)]
-  # platform = [Block(block_size * i, HEIGHT - block_size * 4 , block_size) for i in range(6, 8)]
-  objects =[*floor, fire, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, fire_2, *float]
+  float_2 = [OrangeBlock(block_size * i,  HEIGHT - block_size * 1.5, block_size) for i in range (14, 16)]
+  float_3 = [OrangeBlock(block_size * i,  HEIGHT - block_size * 2.75, block_size) for i in range (16, 18)]
+  float_4 = [OrangeBlock(block_size * i,  HEIGHT - block_size * 4.5, block_size) for i in range (18, 20)]
+  objects =[*floor, *floor_2, fire, fire_2, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, *float, *float_2, *float_3, *float_4]
   offset_x = 0
   scroll_area_width = 200
 
