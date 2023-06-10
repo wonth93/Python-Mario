@@ -53,6 +53,14 @@ def get_block(size):
   surface.blit(image, (0, 0), rect)
   return pygame.transform.scale2x(surface)
 
+def get_orange_block(size):
+  path = join("assets", "Terrain", "Terrain.png")
+  image = pygame.image.load(path).convert_alpha()
+  surface = pygame.Surface((size, size), pygame.SRCALPHA, 32)
+  rect = pygame.Rect(96, 64, size, size)
+  surface.blit(image, (0, 0), rect)
+  return pygame.transform.scale2x(surface)
+
 # Player info and movement
 class Player(pygame.sprite.Sprite):
   COLOR = (255, 0, 0)
@@ -168,6 +176,13 @@ class Block(Object):
     self.image.blit(block, (0, 0))
     self.mask = pygame.mask.from_surface(self.image)
 
+class OrangeBlock(Object):
+  def __init__(self, x, y, size):
+    super().__init__(x, y, size, size)
+    block = get_orange_block(size)
+    self.image.blit(block, (0, 0))
+    self.mask = pygame.mask.from_surface(self.image)
+
 class Fire(Object):
   ANIMATION_DELAY = 3
 
@@ -277,6 +292,8 @@ def main(window):
   player = Player(100, 100, 50, 50)
   fire = Fire(block_size / 3, HEIGHT - block_size * 5 - 64, 16, 32)
   fire.on()
+  fire_2 = Fire(block_size * 8 + block_size / 3, HEIGHT - block_size * 4 - 64, 16, 32)
+  fire_2.on()
   floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-2, 999)]
   wall = [Block(0, HEIGHT - block_size * i, block_size) for i in range(2, 6)]
   wall_2 = [Block(block_size, HEIGHT - block_size * i, block_size) for i in range(2, 4)]
@@ -285,11 +302,10 @@ def main(window):
   obs = [Block(block_size * i, HEIGHT - block_size * 2, block_size) for i in range (7, 10)]
   obs_2 = [Block(block_size * i + block_size / 2, HEIGHT - block_size * 3, block_size) for i in range (7, 9)]
   obs_3 = Block(block_size * 8, HEIGHT - block_size * 4, block_size)
-  fire_2 = Fire(block_size * 8 + block_size / 3, HEIGHT - block_size * 4 - 64, 16, 32)
-  fire_2.on()
+  float = [OrangeBlock(block_size * i,  HEIGHT - block_size * 4, block_size) for i in range (4, 6)]
   # stair = [Block(block_size * i, HEIGHT - block_size * (i - 1) , block_size) for i in range(3, 6)]
   # platform = [Block(block_size * i, HEIGHT - block_size * 4 , block_size) for i in range(6, 8)]
-  objects =[*floor, fire, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, fire_2]
+  objects =[*floor, fire, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, fire_2, *float]
   offset_x = 0
   scroll_area_width = 200
 
