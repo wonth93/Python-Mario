@@ -7,6 +7,7 @@ from os.path import isfile, join
 
 # Initialize the pygame module
 pygame.init()
+pygame.font.init()
 
 # setting the caption at the top of the window
 pygame.display.set_caption("MW Ninja Frog")
@@ -15,6 +16,8 @@ pygame.display.set_caption("MW Ninja Frog")
 WIDTH, HEIGHT = 1000, 600
 FPS = 60 # frame per second
 PLAYER_VEL = 5 # player velocity moving around the screen
+PLAYER_LIFE = pygame.font.SysFont('comicsans', 40)
+ENDGAME = pygame.font.SysFont('comicsans', 40)
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # flip the png from facing right to left
@@ -226,15 +229,23 @@ def get_background(name):
   return tiles, image
 
 # Function to draw the background and player
-def draw(window, background, bg_image, player, objects, offset_x):
+def draw(window, background, bg_image, player, objects, offset_x, player_life):
   for tile in background:
     window.blit(bg_image, tuple(tile))
 
   for obj in objects:
     obj.draw(window, offset_x)
 
+  player_life_text = PLAYER_LIFE.render("Your life: " + str(player_life), 1, (0, 0, 0))
+  window.blit(player_life_text, (10, 10))
   player.draw(window, offset_x)
   pygame.display.update()
+
+def draw_endgame(text):
+  endgame_text = ENDGAME.render(str(text), 1, (255, 0, 0))
+  window.blit(endgame_text, (WIDTH / 2 - endgame_text.get_width() / 2, HEIGHT / 2 - endgame_text.get_height() / 2))
+  pygame.display.update()
+  pygame.time.delay(2000)
 
 def handle_vertical_collision(player, objects, dy):
   collided_objects = []
@@ -310,6 +321,8 @@ def main(window):
   objects =[*floor, *floor_2, fire, fire_2, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, *float, *float_2, *float_3, *float_4]
   offset_x = 0
   scroll_area_width = 200
+  player_life = 5
+  endgame_text = ""
 
   # regulate the frame rate across different devices
   run = True
@@ -320,7 +333,8 @@ def main(window):
       # allow player to quit the game
       if event.type == pygame.QUIT:
         run = False
-        break
+        pygame.quit()
+        quit()
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_UP and player.jump_count < 2:
           player.jump()
@@ -329,17 +343,28 @@ def main(window):
     fire.loop()
     fire_2.loop()
     handle_move(player, objects)
-    draw(window, background, bg_image, player, objects, offset_x)
-    if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel >= 0) or ((player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
-      offset_x += player.x_vel
 
     # restart the game after falling down
     if player.rect.bottom > HEIGHT + block_size:
-      main(window)
+      endgame_text = "You died!"
+      draw_endgame(endgame_text)
+      break
+      
+    
+    if player.hit_count > 0:
+      player_life += 1
+
+    if player_life <= 0:
+      endgame_text = "You died!"
+      draw_endgame(endgame_text)
+      break
+
+    draw(window, background, bg_image, player, objects, offset_x, player_life)
+    if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel >= 0) or ((player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
+      offset_x += player.x_vel
 
 
-  pygame.quit()
-  quit()
+  main(window)
 
 if __name__ == "__main__":
   main(window)
