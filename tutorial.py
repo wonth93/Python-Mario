@@ -321,7 +321,7 @@ def main(window):
   objects =[*floor, *floor_2, fire, fire_2, *wall, *wall_2, *wall_3, wall_4, *obs, *obs_2, obs_3, *float, *float_2, *float_3, *float_4]
   offset_x = 0
   scroll_area_width = 200
-  player_life = 5
+  player_life = 50
   endgame_text = ""
 
   # regulate the frame rate across different devices
@@ -349,10 +349,9 @@ def main(window):
       endgame_text = "You died!"
       draw_endgame(endgame_text)
       break
-      
     
-    if player.hit_count > 0:
-      player_life += 1
+    if player.hit == True and player.hit_count == 0:
+      player_life -= 1
 
     if player_life <= 0:
       endgame_text = "You died!"
