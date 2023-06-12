@@ -7,6 +7,8 @@ Credit to [Python Platformer Game Tutorial for Beginners](https://www.youtube.co
 
 # Final Product
 
+![Game starts](/screenshot/Game_Start.png)
+
 ![screenshot](/screenshot/Screenshot.png)
 
-![screenshot](/screenshot/Screenshot_2.png)
+![Game over](/screenshot/Game_Over.png)
