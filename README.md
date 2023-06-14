@@ -7,7 +7,7 @@ Credit to [Python Platformer Game Tutorial for Beginners](https://www.youtube.co
 
 # Final Product
 
-https://github.com/wonth93/Python-Mario/assets/70833838/6e68a885-f3a8-4a1e-abda-f9744081a204
+![Screen Recoding](/screenshot/Screen_Recording.gif)
 
 ![Game starts](/screenshot/Game_Start.png)
 
