@@ -6,7 +6,7 @@ It was built by Python.
 Credit to [Python Platformer Game Tutorial for Beginners](https://www.youtube.com/watch?v=6gLeplbqtqg)
 
 # Final Product
-![Screen Recording](/screenshot/GIFRecording.gif)
+<!-- ![Screen Recording](/screenshot/Screen_Recording.mov) -->
 
 ![Game starts](/screenshot/Game_Start.png)
 
